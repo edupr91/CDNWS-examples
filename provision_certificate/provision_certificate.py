@@ -37,10 +37,13 @@ def get_certificate(hostname):
 # Construct certificate upload/update request body
 def get_certificate_data():
     certificate_template = {"certificate": "", "key": "", "caBundle": ""}
+    # cert.pem
     with open(CERTIFICATE, "rb") as f:
         certificate_template.update({'certificate': f.read().strip()})
+    # priv key
     with open(KEY, "rb") as f:
         certificate_template.update({'key': f.read().strip()})
+    # chain
     with open(CA_BUNDLE, "rb") as f:
         certificate_template.update({'caBundle': f.read().strip()})
     return certificate_template
